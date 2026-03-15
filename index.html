@@ -13,10 +13,10 @@
 -->
 
 <!-- Perplexity Computer Attribution — SEO Meta Tags -->
-<meta name="generator" content="Perplexity Computer">
+<!-- <meta name="generator" content="Perplexity Computer">
 <meta name="author" content="Perplexity Computer">
 <meta property="og:see_also" content="https://www.perplexity.ai/computer">
-<link rel="author" href="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer"> -->
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1399,14 +1399,13 @@ footer {
       <div class="about__body reveal">
         <p>
           I am an undergraduate biotechnology student at <strong>IIT Hyderabad</strong>, specializing
-          in computational approaches to protein design and antibody engineering.
+          in computational approaches to protein design, antibody engineering and molecular dynamic simulations.
           My research bridges wet-lab molecular biology with cutting-edge machine learning —
           building models that can read, reason about, and ultimately design biological sequences.
         </p>
         <p>
-          My current focus is on <strong>diffusion models for protein sequence generation</strong>,
-          heavy-light chain pairing in antibodies, and zero-shot fitness prediction for engineered variants.
-          I work extensively with tools like IgFold, ABangle, HuMAtch, and KASearch.
+          My current focus is on <strong>diffusion models for protein design</strong>,
+          heavy-light chain pairing in antibodies, and designing topological DNA structures for MD simulations.
         </p>
         <p>
           Beyond computation, I am deeply interested in the philosophical dimensions of
@@ -1458,8 +1457,8 @@ footer {
           <div class="project-card__title">MolViz — Molecular Visualization</div>
           <p class="project-card__desc">
             An interactive 3D molecular visualization tool for exploring protein structures,
-            antibody conformations, and binding interfaces directly in the browser.
-            Supports PDB input with real-time rendering.
+             directly using PDB/Uniprot ID or Protein Name query. Integrates AutoDock Vina for in-browser docking.
+            Supports multiple drawing style and camera angles with real-time rendering.
           </p>
           <div class="project-card__techs">
             <span class="tech-pill">Three.js</span>
@@ -1478,10 +1477,10 @@ footer {
           <div class="project-card__icon" style="background:var(--color-purple-glow);border-color:rgba(155,93,229,0.2);color:var(--color-purple)">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
-          <div class="project-card__title">Protein Diffusion Model</div>
+          <div class="project-card__title">FUN : FoldUNet</div>
           <p class="project-card__desc">
-            Custom diffusion model operating in ESM-2 latent space for protein sequence generation,
-            with cross-attention conditioned on target protein embeddings for peptide binder design.
+            Custom diffusion model operating on protein dihedral angles for protein structure generation,
+            with a simple U-Net architecture and attention layers.
           </p>
           <div class="project-card__techs">
             <span class="tech-pill">PyTorch</span>
@@ -1502,14 +1501,13 @@ footer {
           </div>
           <div class="project-card__title">Antibody H-L Chain Pairing</div>
           <p class="project-card__desc">
-            Analysis pipeline for heavy-light chain compatibility using ABangle geometry metrics,
-            HuMAtch matching scores, and IgFold structure prediction.
+             Predicting antibody heavy-light chain pairing using sequence based deep learning methods.
           </p>
           <div class="project-card__techs">
+            <span class="tech-pill">ABLang2</span>
+            <span class="tech-pill">PyTorch</span>
             <span class="tech-pill">IgFold</span>
-            <span class="tech-pill">ABangle</span>
-            <span class="tech-pill">HuMAtch</span>
-            <span class="tech-pill">Python</span>
+            <span class="tech-pill">ANARCI</span>
           </div>
           <div class="project-card__arrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -1522,15 +1520,15 @@ footer {
           <div class="project-card__icon" style="background:var(--color-green-glow);border-color:rgba(57,255,20,0.2);color:var(--color-green)">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
-          <div class="project-card__title">MD Trajectory Analysis</div>
+          <div class="project-card__title">DNASketch</div>
           <p class="project-card__desc">
-            Molecular dynamics trajectory analysis toolkit for protein conformational sampling,
-            RMSD/RMSF analysis, and binding pocket characterization.
+             Coming Soon !
           </p>
           <div class="project-card__techs">
             <span class="tech-pill">GROMACS</span>
+            <span class="tech-pill">Martini</span>
             <span class="tech-pill">MDAnalysis</span>
-            <span class="tech-pill">NumPy</span>
+            <span class="tech-pill">Python</span>
           </div>
           <div class="project-card__arrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -1553,38 +1551,37 @@ footer {
       <div class="skill-card">
         <div class="skill-card__title">Structural Biology</div>
         <ul class="skill-card__items" role="list">
-          <li class="skill-card__item">IgFold / Abodybuilder3</li>
-          <li class="skill-card__item">ABangle geometry</li>
+          <li class="skill-card__item">IgFold</li>
+          <li class="skill-card__item">MDNA</li>
           <li class="skill-card__item">AlphaFold2 / ESMFold</li>
           <li class="skill-card__item">PDB structure analysis</li>
-          <li class="skill-card__item">RMSD / RMSF metrics</li>
+          <li class="skill-card__item">GROMACS / Martini Coarse Grain</li>
         </ul>
       </div>
       <div class="skill-card">
         <div class="skill-card__title">Machine Learning</div>
         <ul class="skill-card__items" role="list">
-          <li class="skill-card__item">Diffusion transformers (DiT)</li>
+          <li class="skill-card__item">Diffusion Models</li>
           <li class="skill-card__item">ESM-2 protein LLMs</li>
           <li class="skill-card__item">Cross-attention architectures</li>
-          <li class="skill-card__item">Zero-shot fitness prediction</li>
+          <li class="skill-card__item">Convolutional Neural Networks</li>
           <li class="skill-card__item">PyTorch / NumPy</li>
         </ul>
       </div>
       <div class="skill-card">
         <div class="skill-card__title">Bioinformatics</div>
         <ul class="skill-card__items" role="list">
-          <li class="skill-card__item">HuMAtch · KASearch</li>
-          <li class="skill-card__item">Sequence alignment (BLAST)</li>
+          <li class="skill-card__item">ANARCI</li>
+          <li class="skill-card__item">MMSeqs2</li>
           <li class="skill-card__item">NCBI / UniProt databases</li>
-          <li class="skill-card__item">Antibody numbering schemes</li>
-          <li class="skill-card__item">CDR loop analysis</li>
+          <li class="skill-card__item">Multiple Sequence Alignment</li>
+          <li class="skill-card__item">NGS Data Analysis</li>
         </ul>
       </div>
       <div class="skill-card">
         <div class="skill-card__title">Lab &amp; Computation</div>
         <ul class="skill-card__items" role="list">
-          <li class="skill-card__item">Genetic vector design</li>
-          <li class="skill-card__item">GROMACS / AMBER MD</li>
+          <li class="skill-card__item">GROMACS MD</li>
           <li class="skill-card__item">Python · Bash scripting</li>
           <li class="skill-card__item">Google Colab / HPC</li>
           <li class="skill-card__item">Git / GitHub</li>
@@ -1624,7 +1621,7 @@ footer {
     <footer>
       <p class="footer__text">
         &copy; 2026 Biothropic &nbsp;·&nbsp;
-        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+        <!-- <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a> -->
       </p>
     </footer>
   </section>
