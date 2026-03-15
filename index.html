@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biothropic — Protein Design & Antibody Engineering</title>
+<meta name="description" content="Biothropic — computational biology, antibody engineering, protein structure prediction, and machine learning for the life sciences.">
+<meta property="og:title" content="Biothropic — Protein Design & Antibody Engineering">
+<meta property="og:description" content="Computational biology, antibody engineering, protein structure prediction, and ML for the life sciences.">
+<meta property="og:type" content="website">
+
+<!-- Fonts: Cabinet Grotesk (display) + Satoshi (body) from Fontshare -->
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS — Biotech Dark Palette
+   Primary:  Neon Cyan  #00f5d4 / #00d4b8
+   Accent:   Biotech Green #39ff14 / deep glow
+   Base:     Near-black surfaces
+───────────────────────────────────────────── */
+:root {
+  /* Type scale */
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
+  --text-hero: clamp(3.5rem,   1rem    + 8vw,    9rem);
+
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Fonts */
+  --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+  --font-body:    'Satoshi', 'Inter', sans-serif;
+
+  /* Transitions */
+  --transition-interactive: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Radii */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-full: 9999px;
+
+  /* Content widths */
+  --content-narrow:  640px;
+  --content-default: 960px;
+  --content-wide:    1200px;
+}
+
+/* ── BIOTECH DARK PALETTE ─────────────────── */
+[data-theme="dark"],
+:root {
+  --color-bg:              #050a0e;
+  --color-surface:         #080f14;
+  --color-surface-2:       #0d1820;
+  --color-surface-offset:  #0a1520;
+  --color-border:          #122030;
+  --color-divider:         #0f1c28;
+
+  --color-text:            #d8f0f0;
+  --color-text-muted:      #6a9aaa;
+  --color-text-faint:      #2a4a5a;
+  --color-text-inverse:    #050a0e;
+
+  /* Neon Cyan — primary accent */
+  --color-primary:         #00f5d4;
+  --color-primary-dim:     #00c8ad;
+  --color-primary-glow:    rgba(0, 245, 212, 0.18);
+  --color-primary-glow-sm: rgba(0, 245, 212, 0.08);
+
+  /* Biotech Green — secondary accent */
+  --color-green:           #39ff14;
+  --color-green-dim:       #22cc08;
+  --color-green-glow:      rgba(57, 255, 20, 0.14);
+
+  /* Deep purple — tertiary */
+  --color-purple:          #9b5de5;
+  --color-purple-glow:     rgba(155, 93, 229, 0.14);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.7);
+  --shadow-glow-cyan:   0 0 24px rgba(0, 245, 212, 0.25);
+  --shadow-glow-green:  0 0 24px rgba(57, 255, 20, 0.20);
+}
+
+[data-theme="light"] {
+  --color-bg:              #f0f8f8;
+  --color-surface:         #e8f4f4;
+  --color-surface-2:       #dff0f0;
+  --color-surface-offset:  #d4eaea;
+  --color-border:          #b8d8d8;
+  --color-divider:         #c8e0e0;
+  --color-text:            #0d2530;
+  --color-text-muted:      #3a6070;
+  --color-text-faint:      #80aaaa;
+  --color-text-inverse:    #f0f8f8;
+  --color-primary:         #009980;
+  --color-primary-dim:     #007a66;
+  --color-primary-glow:    rgba(0, 153, 128, 0.12);
+  --color-primary-glow-sm: rgba(0, 153, 128, 0.06);
+  --color-green:           #1a9900;
+  --color-green-dim:       #157800;
+  --color-green-glow:      rgba(26, 153, 0, 0.10);
+  --color-purple:          #7040c0;
+  --color-purple-glow:     rgba(112, 64, 192, 0.10);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.12);
+  --shadow-glow-cyan:   0 0 24px rgba(0, 153, 128, 0.15);
+  --shadow-glow-green:  0 0 24px rgba(26, 153, 0, 0.12);
+}
+
+/* ── BASE RESET ───────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  position: relative;
+}
+
+img, video, canvas, svg { display: block; max-width: 100%; }
+ul[role="list"], ol[role="list"] { list-style: none; }
+input, button, textarea, select { font: inherit; color: inherit; }
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.1; }
+p, li { text-wrap: pretty; }
+
+::selection {
+  background: rgba(0, 245, 212, 0.2);
+  color: var(--color-text);
+}
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+button { cursor: pointer; background: none; border: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
+/* ─────────────────────────────────────────────
+   BREATHING LIGHT BACKGROUND
+───────────────────────────────────────────── */
+.breathing-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.breathing-bg::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(0, 245, 212, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(155, 93, 229, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(57, 255, 20, 0.04) 0%, transparent 70%);
+  animation: breathe 12s ease-in-out infinite alternate;
+}
+
+.breathing-bg::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(ellipse 55% 45% at 75% 20%, rgba(0, 245, 212, 0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 55% at 25% 80%, rgba(155, 93, 229, 0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 35% at 60% 60%, rgba(57, 255, 20, 0.03) 0%, transparent 60%);
+  animation: breathe2 16s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  33%  { transform: translate(3%, 2%) scale(1.04); opacity: 1; }
+  66%  { transform: translate(-2%, 3%) scale(0.97); opacity: 0.9; }
+  100% { transform: translate(2%, -2%) scale(1.06); opacity: 1; }
+}
+@keyframes breathe2 {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  50%  { transform: translate(-3%, -2%) scale(1.05); opacity: 1; }
+  100% { transform: translate(2%, 3%) scale(0.95); opacity: 0.85; }
+}
+
+/* Molecular canvas */
+#mol-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ─────────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-8);
+  background: rgba(5, 10, 14, 0.75);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid rgba(0, 245, 212, 0.08);
+  transition: background var(--transition-interactive),
+              border-color var(--transition-interactive);
+}
+
+[data-theme="light"] .nav {
+  background: rgba(240, 248, 248, 0.82);
+  border-bottom-color: rgba(0, 153, 128, 0.12);
+}
+
+.nav--scrolled {
+  background: rgba(5, 10, 14, 0.92);
+  border-bottom-color: rgba(0, 245, 212, 0.14);
+}
+[data-theme="light"] .nav--scrolled {
+  background: rgba(240, 248, 248, 0.96);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--content-wide);
+  margin: 0 auto;
+}
+
+/* Logo */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.nav__logo-svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.nav__logo-wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  text-shadow: 0 0 16px rgba(0, 245, 212, 0.4);
+  transition: text-shadow var(--transition-interactive);
+}
+.nav__logo:hover .nav__logo-wordmark {
+  text-shadow: 0 0 28px rgba(0, 245, 212, 0.65);
+}
+
+/* Nav links */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.nav__link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  letter-spacing: 0.01em;
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive);
+  position: relative;
+}
+.nav__link:hover,
+.nav__link.active {
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+}
+
+/* Projects dropdown */
+.nav__dropdown {
+  position: relative;
+}
+.nav__dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: none;
+  border: none;
+  letter-spacing: 0.01em;
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive);
+}
+.nav__dropdown-toggle:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+}
+.nav__dropdown-toggle svg {
+  transition: transform var(--transition-interactive);
+}
+.nav__dropdown.open .nav__dropdown-toggle svg {
+  transform: rotate(180deg);
+}
+.nav__dropdown.open .nav__dropdown-toggle {
+  color: var(--color-primary);
+}
+
+.nav__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: var(--color-surface-2);
+  border: 1px solid rgba(0, 245, 212, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  box-shadow: var(--shadow-lg), var(--shadow-glow-cyan);
+  z-index: 200;
+}
+.nav__dropdown.open .nav__dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.nav__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive);
+}
+.nav__dropdown-item:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+}
+.nav__dropdown-item-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-glow-sm);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+.nav__dropdown-divider {
+  height: 1px;
+  background: var(--color-divider);
+  margin: var(--space-2) 0;
+}
+
+/* Theme toggle & hamburger */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav__theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive);
+}
+.nav__theme-toggle:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+}
+
+/* Hamburger (mobile) */
+.nav__hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive);
+}
+.nav__hamburger:hover { color: var(--color-primary); background: var(--color-primary-glow-sm); }
+.nav__hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu */
+.nav__mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: rgba(5, 10, 14, 0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 245, 212, 0.1);
+  padding: var(--space-6) var(--space-6) var(--space-8);
+  z-index: 99;
+  flex-direction: column;
+  gap: var(--space-2);
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+[data-theme="light"] .nav__mobile-menu {
+  background: rgba(240, 248, 248, 0.97);
+}
+.nav__mobile-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+.nav__mobile-menu a {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  display: block;
+  transition: color var(--transition-interactive), background var(--transition-interactive);
+}
+.nav__mobile-menu a:hover { color: var(--color-primary); background: var(--color-primary-glow-sm); }
+.nav__mobile-section-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  padding: var(--space-4) var(--space-4) var(--space-2);
+}
+
+/* ─────────────────────────────────────────────
+   MAIN CONTENT WRAPPER
+───────────────────────────────────────────── */
+.page {
+  position: relative;
+  z-index: 10;
+}
+
+/* ─────────────────────────────────────────────
+   HERO SECTION
+───────────────────────────────────────────── */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-24) var(--space-6) var(--space-20);
+  position: relative;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  border: 1px solid rgba(57, 255, 20, 0.25);
+  background: rgba(57, 255, 20, 0.06);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-8);
+  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 8px var(--color-green);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.75); }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  margin-bottom: var(--space-6);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero__title-glow {
+  display: block;
+  color: var(--color-primary);
+  text-shadow:
+    0 0 40px rgba(0, 245, 212, 0.55),
+    0 0 80px rgba(0, 245, 212, 0.25),
+    0 0 120px rgba(0, 245, 212, 0.10);
+  animation: title-breathe 4s ease-in-out infinite;
+}
+@keyframes title-breathe {
+  0%, 100% {
+    text-shadow:
+      0 0 40px rgba(0, 245, 212, 0.55),
+      0 0 80px rgba(0, 245, 212, 0.25),
+      0 0 120px rgba(0, 245, 212, 0.10);
+  }
+  50% {
+    text-shadow:
+      0 0 60px rgba(0, 245, 212, 0.75),
+      0 0 120px rgba(0, 245, 212, 0.40),
+      0 0 180px rgba(0, 245, 212, 0.15);
+  }
+}
+
+[data-theme="light"] .hero__title-glow {
+  color: var(--color-primary);
+  text-shadow: 0 0 20px rgba(0, 153, 128, 0.3), 0 0 40px rgba(0, 153, 128, 0.12);
+  animation: none;
+}
+
+.hero__subtitle-line {
+  display: block;
+  color: var(--color-text);
+  opacity: 0.85;
+}
+
+.hero__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 600px;
+  line-height: 1.65;
+  margin-bottom: var(--space-10);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  margin-bottom: var(--space-12);
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.hero__tag {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 245, 212, 0.22);
+  background: rgba(0, 245, 212, 0.05);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-interactive),
+              border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive);
+}
+.hero__tag:hover {
+  background: rgba(0, 245, 212, 0.10);
+  border-color: rgba(0, 245, 212, 0.45);
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.18);
+}
+
+.hero__tag--green {
+  color: var(--color-green);
+  border-color: rgba(57, 255, 20, 0.22);
+  background: rgba(57, 255, 20, 0.05);
+}
+.hero__tag--green:hover {
+  background: rgba(57, 255, 20, 0.10);
+  border-color: rgba(57, 255, 20, 0.45);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.18);
+}
+
+.hero__tag--purple {
+  color: var(--color-purple);
+  border-color: rgba(155, 93, 229, 0.22);
+  background: rgba(155, 93, 229, 0.05);
+}
+.hero__tag--purple:hover {
+  background: rgba(155, 93, 229, 0.10);
+  border-color: rgba(155, 93, 229, 0.45);
+  box-shadow: 0 0 12px rgba(155, 93, 229, 0.18);
+}
+
+.hero__ctas {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-interactive);
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.35);
+}
+.btn--primary:hover {
+  background: var(--color-primary-dim);
+  box-shadow: 0 0 32px rgba(0, 245, 212, 0.55);
+  transform: translateY(-2px);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.btn--outline:hover {
+  border-color: rgba(0, 245, 212, 0.4);
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+  transform: translateY(-2px);
+}
+
+/* Hero scroll hint */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  animation: fadeInUp 1s 0.8s both;
+}
+.hero__scroll-text {
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+.hero__scroll-arrow {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-faint);
+  animation: bounce-down 2s ease-in-out infinite;
+}
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(6px); opacity: 0.8; }
+}
+
+/* ─────────────────────────────────────────────
+   ABOUT SECTION
+───────────────────────────────────────────── */
+.section {
+  padding: clamp(var(--space-16), 8vw, var(--space-32)) var(--space-6);
+  max-width: var(--content-wide);
+  margin: 0 auto;
+}
+
+.section__header {
+  margin-bottom: var(--space-12);
+}
+
+.section__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+.section__label::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: 0 0 6px rgba(0, 245, 212, 0.5);
+  border-radius: 2px;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  line-height: 1.05;
+}
+
+/* About grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.about__body {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  max-width: 56ch;
+}
+.about__body p + p { margin-top: var(--space-5); }
+
+.about__body strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive),
+              transform var(--transition-interactive);
+}
+.stat-card:hover {
+  border-color: rgba(0, 245, 212, 0.3);
+  box-shadow: var(--shadow-glow-cyan);
+  transform: translateY(-2px);
+}
+.stat-card__number {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+.stat-card__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* ─────────────────────────────────────────────
+   PROJECTS SECTION
+───────────────────────────────────────────── */
+.projects-section {
+  padding: clamp(var(--space-16), 8vw, var(--space-32)) var(--space-6);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.projects-section__inner {
+  max-width: var(--content-wide);
+  margin: 0 auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+
+.project-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive),
+              transform var(--transition-interactive);
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 245, 212, 0.06), transparent);
+  transition: opacity var(--transition-interactive);
+  pointer-events: none;
+}
+.project-card:hover {
+  border-color: rgba(0, 245, 212, 0.3);
+  box-shadow: var(--shadow-glow-cyan);
+  transform: translateY(-4px);
+}
+.project-card:hover::before { opacity: 1; }
+
+.project-card--featured {
+  grid-column: span 2;
+}
+.project-card--featured .project-card__title {
+  font-size: var(--text-xl);
+}
+
+.project-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  background: var(--color-green-glow);
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+.project-card__badge--cyan {
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+  border-color: rgba(0, 245, 212, 0.2);
+}
+.project-card__badge--purple {
+  color: var(--color-purple);
+  background: var(--color-purple-glow);
+  border-color: rgba(155, 93, 229, 0.2);
+}
+
+.project-card__icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-glow-sm);
+  border: 1px solid rgba(0, 245, 212, 0.15);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.project-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.project-card__techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.tech-pill {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-text-faint);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+}
+
+.project-card__arrow {
+  margin-top: auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text-faint);
+  background: var(--color-surface-2);
+  align-self: flex-end;
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive),
+              transform var(--transition-interactive);
+}
+.project-card:hover .project-card__arrow {
+  color: var(--color-primary);
+  background: var(--color-primary-glow-sm);
+  transform: translateX(3px);
+}
+
+/* ─────────────────────────────────────────────
+   SKILLS SECTION
+───────────────────────────────────────────── */
+.skills-section {
+  padding: clamp(var(--space-16), 8vw, var(--space-32)) var(--space-6);
+  max-width: var(--content-wide);
+  margin: 0 auto;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-12);
+}
+
+.skill-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive),
+              transform var(--transition-interactive);
+}
+.skill-card:hover {
+  border-color: rgba(0, 245, 212, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 245, 212, 0.08);
+  transform: translateY(-2px);
+}
+
+.skill-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.01em;
+}
+.skill-card__items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.skill-card__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.skill-card__item::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 4px rgba(0, 245, 212, 0.5);
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+   CONTACT / FOOTER
+───────────────────────────────────────────── */
+.contact-section {
+  padding: clamp(var(--space-16), 8vw, var(--space-32)) var(--space-6);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+.contact-section__inner {
+  max-width: var(--content-narrow);
+  margin: 0 auto;
+}
+
+.contact-section__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+.contact-section__desc {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  margin-bottom: var(--space-10);
+}
+
+.contact-links {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-16);
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+  transition: all var(--transition-interactive);
+}
+.contact-link:hover {
+  color: var(--color-primary);
+  border-color: rgba(0, 245, 212, 0.4);
+  background: var(--color-primary-glow-sm);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.12);
+  transform: translateY(-2px);
+}
+
+footer {
+  padding: var(--space-6);
+  text-align: center;
+  border-top: 1px solid var(--color-divider);
+  max-width: var(--content-wide);
+  margin: 0 auto;
+}
+.footer__text {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+.footer__text a {
+  color: var(--color-primary);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity var(--transition-interactive);
+}
+.footer__text a:hover { opacity: 1; }
+
+/* ─────────────────────────────────────────────
+   SCROLL-REVEAL ANIMATIONS
+───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0ms; }
+.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:80ms; }
+.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:160ms; }
+.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:240ms; }
+.reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:320ms; }
+.reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:400ms; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-card--featured { grid-column: span 2; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-12); }
+  .about__stats { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav__links,
+  .nav__dropdown { display: none; }
+  .nav__hamburger { display: flex; }
+  .nav__mobile-menu { display: flex; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card--featured { grid-column: span 1; }
+
+  .about__stats { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+
+  .hero__title { letter-spacing: -0.03em; }
+
+  .hero__ctas { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 280px; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .about__stats { grid-template-columns: 1fr 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .contact-links { flex-direction: column; align-items: center; }
+  .contact-link { width: 100%; max-width: 260px; justify-content: center; }
+}
+
+/* ─────────────────────────────────────────────
+   DIVIDER LINE
+───────────────────────────────────────────── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(0, 245, 212, 0.2) 30%,
+    rgba(0, 245, 212, 0.2) 70%,
+    transparent);
+  max-width: var(--content-wide);
+  margin: 0 auto;
+}
+</style>
+</head>
+<body>
+
+<!-- ── ANIMATED BACKGROUNDS ──────────────────── -->
+<div class="breathing-bg" aria-hidden="true"></div>
+<canvas id="mol-canvas" aria-hidden="true"></canvas>
+
+<!-- ── NAVIGATION ────────────────────────────── -->
+<nav class="nav" id="navbar" aria-label="Primary navigation">
+  <div class="nav__inner">
+
+    <!-- Logo -->
+    <a href="/" class="nav__logo" aria-label="Biothropic home">
+      <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <!-- Hexagonal protein node mark -->
+        <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" class="logo-hex"/>
+        <circle cx="16" cy="16" r="3.5" fill="currentColor" opacity="0.9"/>
+        <line x1="16" y1="12.5" x2="16" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="18.6" y1="13.8" x2="24" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="18.6" y1="18.2" x2="24" y2="22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="19.5" x2="16" y2="27" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="13.4" y1="18.2" x2="8" y2="22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="13.4" y1="13.8" x2="8" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <style>
+          .logo-hex { color: var(--color-primary); }
+          @keyframes logo-rotate { to { transform: rotate(60deg); transform-origin: 16px 16px; } }
+        </style>
+      </svg>
+      <span class="nav__logo-wordmark">Biothropic</span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="nav__links" role="list">
+      <li><a href="#home" class="nav__link active">Home</a></li>
+      <li><a href="#about" class="nav__link">About</a></li>
+
+      <!-- Projects dropdown -->
+      <li class="nav__dropdown" id="projects-dropdown">
+        <button class="nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false" id="projects-btn">
+          Projects
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu" role="menu">
+          <a href="molviz.html" class="nav__dropdown-item" role="menuitem">
+            <span class="nav__dropdown-item-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 1-10-10"/><path d="M2 12a10 10 0 0 1 10-10"/><path d="M22 12a10 10 0 0 1-10 10"/></svg>
+            </span>
+            MolViz — 3D Viewer
+          </a>
+          <div class="nav__dropdown-divider"></div>
+          <a href="#projects" class="nav__dropdown-item" role="menuitem">
+            <span class="nav__dropdown-item-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </span>
+            All Projects
+          </a>
+        </div>
+      </li>
+
+      <li><a href="#skills" class="nav__link">Skills</a></li>
+      <li><a href="#contact" class="nav__link">Contact</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <!-- Theme toggle -->
+      <button class="nav__theme-toggle" data-theme-toggle aria-label="Switch to light mode">
+        <!-- Moon icon (shown in dark mode) -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <!-- Mobile hamburger -->
+      <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile menu (hidden by default, shown via JS) -->
+<div class="nav__mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="nav__mobile-section-label">Navigation</div>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+  <div class="nav__mobile-section-label" style="margin-top: var(--space-4);">Projects</div>
+  <a href="molviz.html">MolViz — 3D Molecule Viewer</a>
+</div>
+
+<!-- ── MAIN ──────────────────────────────────── -->
+<main class="page">
+
+  <!-- HERO -->
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <span class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      Computational Biology · Protein Design · ML
+    </span>
+
+    <h1 class="hero__title" id="hero-title">
+      <span class="hero__subtitle-line" style="font-size:clamp(1.2rem,2.5vw,2rem);font-weight:700;letter-spacing:0.02em;color:var(--color-text-muted);margin-bottom:0.2em;display:block">Welcome to</span>
+      <span class="hero__title-glow">Biothropic</span>
+    </h1>
+
+    <p class="hero__desc">
+      Exploring the intersection of computational biology, antibody engineering,
+      and machine learning — building tools that decode and design life at the molecular scale.
+    </p>
+
+    <div class="hero__tags" role="list" aria-label="Research areas">
+      <span class="hero__tag" role="listitem">Antibody Engineering</span>
+      <span class="hero__tag hero__tag--green" role="listitem">Protein Structure Prediction</span>
+      <span class="hero__tag hero__tag--purple" role="listitem">Diffusion Models</span>
+      <span class="hero__tag" role="listitem">IgFold · ABangle</span>
+      <span class="hero__tag hero__tag--green" role="listitem">Molecular Dynamics</span>
+      <span class="hero__tag hero__tag--purple" role="listitem">Deep Learning</span>
+    </div>
+
+    <div class="hero__ctas">
+      <a href="#projects" class="btn btn--primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        View Projects
+      </a>
+      <a href="molviz.html" class="btn btn--outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 1-10-10"/></svg>
+        Open MolViz
+      </a>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-text">scroll</span>
+      <svg class="hero__scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="section__header reveal">
+      <p class="section__label">About</p>
+      <h2 class="section__title" id="about-title">Decoding the language<br>of proteins</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about__body reveal">
+        <p>
+          I am an undergraduate biotechnology student at <strong>IIT Hyderabad</strong>, specializing
+          in computational approaches to protein design and antibody engineering.
+          My research bridges wet-lab molecular biology with cutting-edge machine learning —
+          building models that can read, reason about, and ultimately design biological sequences.
+        </p>
+        <p>
+          My current focus is on <strong>diffusion models for protein sequence generation</strong>,
+          heavy-light chain pairing in antibodies, and zero-shot fitness prediction for engineered variants.
+          I work extensively with tools like IgFold, ABangle, HuMAtch, and KASearch.
+        </p>
+        <p>
+          Beyond computation, I am deeply interested in the philosophical dimensions of
+          synthetic biology — what it means to engineer life, and the responsibilities that come with it.
+        </p>
+      </div>
+      <div class="about__stats reveal-stagger">
+        <div class="stat-card">
+          <div class="stat-card__number">3+</div>
+          <div class="stat-card__label">Years Coding Biology</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">Ab</div>
+          <div class="stat-card__label">Antibody Engineering</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">DL</div>
+          <div class="stat-card__label">Deep Learning Models</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">MD</div>
+          <div class="stat-card__label">Molecular Dynamics</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- PROJECTS -->
+  <section class="projects-section" id="projects" aria-labelledby="projects-title">
+    <div class="projects-section__inner">
+      <div class="section__header reveal">
+        <p class="section__label">Projects</p>
+        <h2 class="section__title" id="projects-title">Research &amp; Engineering Work</h2>
+      </div>
+
+      <div class="projects-grid reveal-stagger">
+
+        <!-- Featured: MolViz -->
+        <a href="molviz.html" class="project-card project-card--featured">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3)">
+            <span class="project-card__badge project-card__badge--cyan">✦ Featured</span>
+            <div class="project-card__badge" style="color:var(--color-text-faint);border-color:transparent;background:none;font-size:10px;">Interactive 3D</div>
+          </div>
+          <div class="project-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 1-10-10"/><path d="M2 12a10 10 0 0 1 10-10"/><path d="M22 12a10 10 0 0 1-10 10"/></svg>
+          </div>
+          <div class="project-card__title">MolViz — Molecular Visualization</div>
+          <p class="project-card__desc">
+            An interactive 3D molecular visualization tool for exploring protein structures,
+            antibody conformations, and binding interfaces directly in the browser.
+            Supports PDB input with real-time rendering.
+          </p>
+          <div class="project-card__techs">
+            <span class="tech-pill">Three.js</span>
+            <span class="tech-pill">WebGL</span>
+            <span class="tech-pill">PDB Parser</span>
+            <span class="tech-pill">JavaScript</span>
+          </div>
+          <div class="project-card__arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <!-- Diffusion Models -->
+        <div class="project-card">
+          <span class="project-card__badge">Research</span>
+          <div class="project-card__icon" style="background:var(--color-purple-glow);border-color:rgba(155,93,229,0.2);color:var(--color-purple)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="project-card__title">Protein Diffusion Model</div>
+          <p class="project-card__desc">
+            Custom diffusion model operating in ESM-2 latent space for protein sequence generation,
+            with cross-attention conditioned on target protein embeddings for peptide binder design.
+          </p>
+          <div class="project-card__techs">
+            <span class="tech-pill">PyTorch</span>
+            <span class="tech-pill">ESM-2</span>
+            <span class="tech-pill">DiT</span>
+            <span class="tech-pill">Python</span>
+          </div>
+          <div class="project-card__arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <!-- Antibody Engineering -->
+        <div class="project-card">
+          <span class="project-card__badge project-card__badge--cyan">Computational</span>
+          <div class="project-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <div class="project-card__title">Antibody H-L Chain Pairing</div>
+          <p class="project-card__desc">
+            Analysis pipeline for heavy-light chain compatibility using ABangle geometry metrics,
+            HuMAtch matching scores, and IgFold structure prediction.
+          </p>
+          <div class="project-card__techs">
+            <span class="tech-pill">IgFold</span>
+            <span class="tech-pill">ABangle</span>
+            <span class="tech-pill">HuMAtch</span>
+            <span class="tech-pill">Python</span>
+          </div>
+          <div class="project-card__arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <!-- MD Simulations -->
+        <div class="project-card">
+          <span class="project-card__badge project-card__badge--purple">Simulation</span>
+          <div class="project-card__icon" style="background:var(--color-green-glow);border-color:rgba(57,255,20,0.2);color:var(--color-green)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="project-card__title">MD Trajectory Analysis</div>
+          <p class="project-card__desc">
+            Molecular dynamics trajectory analysis toolkit for protein conformational sampling,
+            RMSD/RMSF analysis, and binding pocket characterization.
+          </p>
+          <div class="project-card__techs">
+            <span class="tech-pill">GROMACS</span>
+            <span class="tech-pill">MDAnalysis</span>
+            <span class="tech-pill">NumPy</span>
+          </div>
+          <div class="project-card__arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SKILLS -->
+  <section class="skills-section" id="skills" aria-labelledby="skills-title">
+    <div class="section__header reveal">
+      <p class="section__label">Skills</p>
+      <h2 class="section__title" id="skills-title">Technical Arsenal</h2>
+    </div>
+    <div class="skills-grid reveal-stagger">
+      <div class="skill-card">
+        <div class="skill-card__title">Structural Biology</div>
+        <ul class="skill-card__items" role="list">
+          <li class="skill-card__item">IgFold / Abodybuilder3</li>
+          <li class="skill-card__item">ABangle geometry</li>
+          <li class="skill-card__item">AlphaFold2 / ESMFold</li>
+          <li class="skill-card__item">PDB structure analysis</li>
+          <li class="skill-card__item">RMSD / RMSF metrics</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__title">Machine Learning</div>
+        <ul class="skill-card__items" role="list">
+          <li class="skill-card__item">Diffusion transformers (DiT)</li>
+          <li class="skill-card__item">ESM-2 protein LLMs</li>
+          <li class="skill-card__item">Cross-attention architectures</li>
+          <li class="skill-card__item">Zero-shot fitness prediction</li>
+          <li class="skill-card__item">PyTorch / NumPy</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__title">Bioinformatics</div>
+        <ul class="skill-card__items" role="list">
+          <li class="skill-card__item">HuMAtch · KASearch</li>
+          <li class="skill-card__item">Sequence alignment (BLAST)</li>
+          <li class="skill-card__item">NCBI / UniProt databases</li>
+          <li class="skill-card__item">Antibody numbering schemes</li>
+          <li class="skill-card__item">CDR loop analysis</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__title">Lab &amp; Computation</div>
+        <ul class="skill-card__items" role="list">
+          <li class="skill-card__item">Genetic vector design</li>
+          <li class="skill-card__item">GROMACS / AMBER MD</li>
+          <li class="skill-card__item">Python · Bash scripting</li>
+          <li class="skill-card__item">Google Colab / HPC</li>
+          <li class="skill-card__item">Git / GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="contact-section__inner">
+      <div class="reveal">
+        <h2 class="contact-section__title" id="contact-title">Let's collaborate</h2>
+        <p class="contact-section__desc">
+          Open to research internships, collaborations in antibody engineering, protein design,
+          or ML for biology. Always happy to discuss ideas at the frontier of computational life science.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:bt23btech11023@iith.ac.in" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <a href="https://github.com/biothropic" class="contact-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://biothropic.github.io" class="contact-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          biothropic.github.io
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p class="footer__text">
+        &copy; 2026 Biothropic &nbsp;·&nbsp;
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+      </p>
+    </footer>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
+<script>
+/* ─────────────────────────────────────────
+   1. THEME TOGGLE
+───────────────────────────────────────── */
+(function () {
+  const root = document.documentElement;
+  const toggle = document.querySelector('[data-theme-toggle]');
+
+  // Always start dark
+  let theme = 'dark';
+  root.setAttribute('data-theme', theme);
+
+  const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+  const moonIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
+  if (toggle) {
+    toggle.innerHTML = moonIcon;
+    toggle.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      toggle.innerHTML = theme === 'dark' ? moonIcon : sunIcon;
+      toggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+})();
+
+/* ─────────────────────────────────────────
+   2. NAVBAR SCROLL BEHAVIOR
+───────────────────────────────────────── */
+(function () {
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 30);
+  }, { passive: true });
+})();
+
+/* ─────────────────────────────────────────
+   3. MOBILE HAMBURGER MENU
+───────────────────────────────────────── */
+(function () {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+
+  btn.addEventListener('click', () => {
+    const open = btn.classList.toggle('open');
+    menu.classList.toggle('open', open);
+    menu.style.display = open ? 'flex' : 'flex';
+    menu.setAttribute('aria-hidden', String(!open));
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  // Close on nav link click
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
+/* ─────────────────────────────────────────
+   4. PROJECTS DROPDOWN
+───────────────────────────────────────── */
+(function () {
+  const dropdown = document.getElementById('projects-dropdown');
+  const btn = document.getElementById('projects-btn');
+  if (!dropdown || !btn) return;
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = dropdown.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  document.addEventListener('click', () => {
+    dropdown.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  });
+
+  dropdown.querySelector('.nav__dropdown-menu').addEventListener('click', e => e.stopPropagation());
+})();
+
+/* ─────────────────────────────────────────
+   5. ACTIVE NAV LINK (Intersection Observer)
+───────────────────────────────────────── */
+(function () {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav__link');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(s => obs.observe(s));
+})();
+
+/* ─────────────────────────────────────────
+   6. SCROLL REVEAL
+───────────────────────────────────────── */
+(function () {
+  const els = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (!els.length) return;
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ─────────────────────────────────────────
+   7. MOLECULAR CANVAS ANIMATION
+   Renders floating protein-like nodes with
+   connecting bonds (like a molecular graph),
+   plus a slow-drifting DNA-helix strand.
+───────────────────────────────────────── */
+(function () {
+  const canvas = document.getElementById('mol-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W, H, animId;
+  let particles = [];
+  let helix = [];
+
+  const PARTICLE_COUNT = 55;
+  const LINK_DIST = 130;
+  const HELIX_POINTS = 80;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    initParticles();
+    initHelix();
+  }
+
+  // ── Accent colors (OKLCH-inspired neon palette) ──
+  const colors = [
+    { r: 0,   g: 245, b: 212 }, // cyan
+    { r: 57,  g: 255, b: 20  }, // green
+    { r: 155, g: 93,  b: 229 }, // purple
+  ];
+
+  function randColor() { return colors[Math.floor(Math.random() * colors.length)]; }
+
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const c = randColor();
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 2.5 + 1.5,
+        c,
+        glowR: Math.random() * 12 + 6,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.012 + Math.random() * 0.015,
+      });
+    }
+  }
+
+  // ── DNA Helix: a pair of sinusoidal strands ──
+  let helixPhase = 0;
+  const HELIX_X = 0.82; // fraction of width
+  const HELIX_AMP = 28;
+  const HELIX_PITCH = 55;
+
+  function initHelix() {
+    helix = [];
+    for (let i = 0; i < HELIX_POINTS; i++) {
+      helix.push({ t: i / HELIX_POINTS });
+    }
+  }
+
+  function drawHelix(t) {
+    const cx = W * HELIX_X;
+    const totalH = H * 0.85;
+    const startY = H * 0.075;
+
+    // Two strands
+    for (let strand = 0; strand < 2; strand++) {
+      ctx.beginPath();
+      for (let i = 0; i < HELIX_POINTS; i++) {
+        const y = startY + (i / HELIX_POINTS) * totalH;
+        const phase = (i / HELIX_POINTS) * Math.PI * 2 * (totalH / HELIX_PITCH) + helixPhase + strand * Math.PI;
+        const x = cx + Math.sin(phase) * HELIX_AMP;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      const alpha = 0.18 + strand * 0.04;
+      ctx.strokeStyle = strand === 0
+        ? `rgba(0,245,212,${alpha})`
+        : `rgba(155,93,229,${alpha})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Cross-rungs (base pairs) every ~8 points
+    for (let i = 0; i < HELIX_POINTS; i += 7) {
+      const y = startY + (i / HELIX_POINTS) * totalH;
+      const phase0 = (i / HELIX_POINTS) * Math.PI * 2 * (totalH / HELIX_PITCH) + helixPhase;
+      const phase1 = phase0 + Math.PI;
+      const x0 = cx + Math.sin(phase0) * HELIX_AMP;
+      const x1 = cx + Math.sin(phase1) * HELIX_AMP;
+
+      // Only draw rungs when strands are far enough apart (front-facing)
+      const dist = Math.abs(x1 - x0);
+      if (dist > 4) {
+        const grad = ctx.createLinearGradient(x0, y, x1, y);
+        grad.addColorStop(0, 'rgba(0,245,212,0.22)');
+        grad.addColorStop(0.5, 'rgba(57,255,20,0.12)');
+        grad.addColorStop(1, 'rgba(155,93,229,0.22)');
+        ctx.beginPath();
+        ctx.moveTo(x0, y);
+        ctx.lineTo(x1, y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Small nodes at ends
+        [x0, x1].forEach((nx, si) => {
+          ctx.beginPath();
+          ctx.arc(nx, y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = si === 0 ? 'rgba(0,245,212,0.55)' : 'rgba(155,93,229,0.55)';
+          ctx.fill();
+        });
+      }
+    }
+  }
+
+  function drawParticles(t) {
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      // Move
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -20) p.x = W + 20;
+      if (p.x > W + 20) p.x = -20;
+      if (p.y < -20) p.y = H + 20;
+      if (p.y > H + 20) p.y = -20;
+
+      p.pulse += p.pulseSpeed;
+      const glow = p.glowR * (0.7 + 0.3 * Math.sin(p.pulse));
+
+      // Draw links first (below nodes)
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = q.x - p.x;
+        const dy = q.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < LINK_DIST) {
+          const alpha = (1 - dist / LINK_DIST) * 0.22;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(${p.c.r},${p.c.g},${p.c.b},${alpha})`;
+          ctx.lineWidth = (1 - dist / LINK_DIST) * 1.2;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw nodes on top
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      const glow = p.glowR * (0.7 + 0.3 * Math.sin(p.pulse));
+
+      // Glow halo
+      const radialGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glow);
+      radialGrad.addColorStop(0, `rgba(${p.c.r},${p.c.g},${p.c.b},0.22)`);
+      radialGrad.addColorStop(1, `rgba(${p.c.r},${p.c.g},${p.c.b},0)`);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, glow, 0, Math.PI * 2);
+      ctx.fillStyle = radialGrad;
+      ctx.fill();
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.c.r},${p.c.g},${p.c.b},0.85)`;
+      ctx.fill();
+    }
+  }
+
+  let lastT = 0;
+  function frame(t) {
+    animId = requestAnimationFrame(frame);
+    const dt = t - lastT;
+    lastT = t;
+    if (dt > 100) return; // tab was backgrounded
+
+    ctx.clearRect(0, 0, W, H);
+    helixPhase += 0.006;
+    drawHelix(t);
+    drawParticles(t);
+  }
+
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  animId = requestAnimationFrame(frame);
+
+  // Pause when tab is hidden to save battery
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animId);
+    } else {
+      lastT = 0;
+      animId = requestAnimationFrame(frame);
+    }
+  });
+})();
+
+/* ─────────────────────────────────────────
+   8. SMOOTH ANCHOR SCROLLING
+───────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
